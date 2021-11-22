@@ -1,0 +1,33 @@
+{
+	"emulators": {
+		"default": {
+			"port": 3569,
+			"serviceAccount": "bloctoswap-account"
+		}
+	},
+	"contracts": {
+		"ListedTokens": "./contracts/ListedTokens.cdc",
+		"TestListedTokens": "./contracts/TestListedTokens.cdc",
+		"ListedPairs": "./tests/ListedPairs.cdc",
+		"TestListedPairs": "./tests/TestListedPairs.cdc"
+	},
+	"networks": {
+		"emulator": "127.0.0.1:3569",
+		"mainnet": "access.mainnet.nodes.onflow.org:9000",
+		"testnet": "access.devnet.nodes.onflow.org:9000"
+	},
+	"accounts": {
+		"bloctoswap-account": {
+			"address": "ADDRESS",
+			"keys": "PRIVATE_KEY"
+		}
+	},
+	"deployments": {
+		"testnet": {
+      "bloctoswap-account": ["ListedTokens", "ListedPairs"]
+    },
+		"mainnet": {
+      "bloctoswap-account": ["ListedTokens", "ListedPairs"]
+    }
+	}
+}
