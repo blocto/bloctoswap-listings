@@ -1,0 +1,17 @@
+{
+  "name": "bloctoswap-contracts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Yang Lin",
+  "license": "MIT",
+  "dependencies": {
+    "@onflow/fcl": "^0.0.77",
+    "@onflow/types": "^0.0.6",
+    "dotenv": "^10.0.0",
+    "elliptic": "^6.5.4",
+    "sha3": "^2.1.4"
+  },
+  "scripts": {
+    "update-data": "node index.js"
+  }
+}
