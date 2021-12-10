@@ -19,13 +19,13 @@ pub contract ListedPairs {
     }
   }
 
-  pub var _pairs: { String: PairInfo };
+  access(contract) var _pairs: { String: PairInfo };
 
   pub fun pairExists(key: String): Bool {
     return self._pairs.containsKey(key)
   }
 
-  pub fun addPair(name: String, token0: String, token1: String, address: Address, liquidityToken: String?) {
+  access(contract) fun addPair(name: String, token0: String, token1: String, address: Address, liquidityToken: String?) {
     var key = name.concat(".").concat(address.toString())
     if (self._pairs.containsKey(key)) {
       return;
@@ -40,11 +40,11 @@ pub contract ListedPairs {
     )
   }
 
-  pub fun removePair(key: String) {
+  access(contract) fun removePair(key: String) {
     self._pairs.remove(key: key)
   }
 
-  pub fun updatePair(name: String, address: Address, liquidityToken: String?) {
+  access(contract) fun updatePair(name: String, address: Address, liquidityToken: String?) {
     var key = name.concat(".").concat(address.toString())
     self._pairs[key]!.update(liquidityToken: liquidityToken)
   }

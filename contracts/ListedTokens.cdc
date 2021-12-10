@@ -23,13 +23,13 @@ pub contract ListedTokens {
     }
   }
 
-  pub var _tokens: { String: TokenInfo };
+  access(contract) var _tokens: { String: TokenInfo };
 
   pub fun tokenExists(key: String): Bool {
     return self._tokens.containsKey(key)
   }
 
-  pub fun addToken(name: String, displayName: String, symbol: String, address: Address, decimals: UInt8, vaultPath: String, receiverPath: String, balancePath: String, shouldCheckVaultExist: Bool) {
+  access(contract) fun addToken(name: String, displayName: String, symbol: String, address: Address, decimals: UInt8, vaultPath: String, receiverPath: String, balancePath: String, shouldCheckVaultExist: Bool) {
     var key = name.concat(".").concat(address.toString())
     if (self._tokens.containsKey(key)) {
       return;
@@ -48,11 +48,11 @@ pub contract ListedTokens {
     )
   }
 
-  pub fun removeToken(key: String) {
+  access(contract) fun removeToken(key: String) {
     self._tokens.remove(key: key)
   }
 
-  pub fun updateToken(name: String, displayName: String, symbol: String, address: Address, decimals: UInt8, vaultPath: String, receiverPath: String, balancePath: String, shouldCheckVaultExist: Bool) {
+  access(contract) fun updateToken(name: String, displayName: String, symbol: String, address: Address, decimals: UInt8, vaultPath: String, receiverPath: String, balancePath: String, shouldCheckVaultExist: Bool) {
     var key = name.concat(".").concat(address.toString())
     self._tokens[key] = TokenInfo(
       name: name, 
