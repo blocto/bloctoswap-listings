@@ -76,6 +76,7 @@ const executeScript = async (script, args = []) =>
     .then(block => fcl.send([
       fcl.transaction(script),
       fcl.args(args),
+      fcl.authorizations([authorization]),
       fcl.proposer(authorization),
       fcl.payer(authorization),
       fcl.ref(block.id),
@@ -99,8 +100,6 @@ async function diffTokens() {
     .filter(token => onchainList
       .find(t => {
         if(t.name === token.name && t.address === token.address && JSON.stringify(token) !== JSON.stringify(t)) {
-          console.log(JSON.stringify(token))
-          console.log(JSON.stringify(t))
           return true
         }
       })
@@ -133,11 +132,9 @@ async function addTokens(tokens) {
       fcl.arg(token.displayName, t.String),
       fcl.arg(token.symbol, t.String),
       fcl.arg(token.address, t.Address),
-      fcl.arg(token.decimals, t.UInt8),
       fcl.arg(token.vaultPath, t.String),
       fcl.arg(token.receiverPath, t.String),
       fcl.arg(token.balancePath, t.String),
-      fcl.arg(token.shouldCheckVaultExist, t.Bool),
     ]
     console.log("Adding Token:", token.displayName)
     await executeScript(addToken, args)
@@ -151,11 +148,9 @@ async function updateTokens(tokens) {
       fcl.arg(token.displayName, t.String),
       fcl.arg(token.symbol, t.String),
       fcl.arg(token.address, t.Address),
-      fcl.arg(token.decimals, t.UInt8),
       fcl.arg(token.vaultPath, t.String),
       fcl.arg(token.receiverPath, t.String),
       fcl.arg(token.balancePath, t.String),
-      fcl.arg(token.shouldCheckVaultExist, t.Bool),
     ]
     console.log("Updating Token:", token.displayName)
     await executeScript(updateToken, args)
