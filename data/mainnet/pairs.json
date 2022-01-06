@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "name": "FlowSwapPair",
+    "token0": "FlowToken",
+    "token1": "TeleportedTetherToken",
+    "address": "0xc6c77b9f5c7a378f",
+    "liquidityToken": null
+  },
+  {
+    "name": "BltUsdtSwapPair",
+    "token0": "BloctoToken",
+    "token1": "TeleportedTetherToken",
+    "address": "0xfcb06a5ae5b21a2d",
+    "liquidityToken": null
+  },
+  {
+    "name": "FusdUsdtSwapPair",
+    "token0": "FUSD",
+    "token1": "TeleportedTetherToken",
+    "address": "0x87f3f233f34b0733",
+    "liquidityToken": null
+  }
+]
