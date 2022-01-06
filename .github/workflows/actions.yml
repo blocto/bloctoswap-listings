@@ -10,6 +10,8 @@ on:
 env:
   ADDRESS: ${{ secrets.ADDRESS }}
   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+  TESTNET_ADDRESS: ${{ secrets.TESTNET_ADDRESS }}
+  TESTNET_PRIVATE_KEY: ${{ secrets.TESTNET_PRIVATE_KEY }}
 
 jobs:
   build:
