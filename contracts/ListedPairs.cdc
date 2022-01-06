@@ -34,7 +34,7 @@ pub contract ListedPairs {
     pub fun addPair(name: String, token0: String, token1: String, address: Address, liquidityToken: String?) {
       var key = name.concat(".").concat(address.toString())
 
-      if (pairExists(key: key)) {
+      if (ListedPairs.pairExists(key: key)) {
         return
       }
 
@@ -46,7 +46,7 @@ pub contract ListedPairs {
         liquidityToken: liquidityToken,
       )
 
-      emit PairAdded(key: key, name: name, token0: String, token1: String, address: Address)
+      emit PairAdded(key: key, name: name, token0: token0, token1: token1, address: address)
     }
 
     pub fun updatePair(name: String, address: Address, liquidityToken: String?) {

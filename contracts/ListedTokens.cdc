@@ -38,7 +38,7 @@ pub contract ListedTokens {
         return
       }
 
-      self._tokens[key] = TokenInfo(
+      ListedTokens._tokens[key] = TokenInfo(
         name: name,
         displayName: displayName,
         symbol: symbol,
@@ -54,7 +54,7 @@ pub contract ListedTokens {
     pub fun updateToken(name: String, displayName: String, symbol: String, address: Address, vaultPath: String, receiverPath: String, balancePath: String) {
       var key = name.concat(".").concat(address.toString())
 
-      self._tokens[key] = TokenInfo(
+      ListedTokens._tokens[key] = TokenInfo(
         name: name,
         displayName: displayName,
         symbol: symbol,
@@ -68,7 +68,7 @@ pub contract ListedTokens {
     }
 
     pub fun removeToken(key: String) {
-      self._tokens.remove(key: key)
+      ListedTokens._tokens.remove(key: key)
 
       emit TokenRemoved(key: key)
     }
