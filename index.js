@@ -2,7 +2,6 @@
 const fcl = require('@onflow/fcl')
 const t = require('@onflow/types')
 const EC = require('elliptic').ec
-const ec = new EC('p256')
 const { SHA3 } = require('sha3')
 const addToken = require('./scripts/addToken')
 const updateToken = require('./scripts/updateToken')
@@ -20,6 +19,8 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY
 
 const TOKENS_LIST = require(`./data/${NETWORK}/tokens.json`)
 const PAIRS_LIST = require(`./data/${NETWORK}/pairs.json`)
+
+const ec = new EC(NETWORK === 'testnet' ? 'p256' : 'secp256k1')
 
 const signWithKey = (privateKey, msgHex) => {
   const key = ec.keyFromPrivate(Buffer.from(privateKey, 'hex'))
@@ -69,7 +70,7 @@ const authorization = async (account = {}) => {
   }
 }
 
-const executeScript = async (script, args = []) => 
+const executeScript = async (script, args = []) =>
   fcl
     .send([fcl.getBlock(true)])
     .then(fcl.decode)
@@ -99,7 +100,7 @@ async function diffTokens() {
   const updatedTokens = TOKENS_LIST
     .filter(token => onchainList
       .find(t => {
-        if(t.name === token.name && t.address === token.address && JSON.stringify(token) !== JSON.stringify(t)) {
+        if (t.name === token.name && t.address === token.address && JSON.stringify(token) !== JSON.stringify(t)) {
           return true
         }
       })
@@ -126,7 +127,7 @@ async function diffPairs() {
 }
 
 async function addTokens(tokens) {
-  for(const token of tokens) {
+  for (const token of tokens) {
     const args = [
       fcl.arg(token.name, t.String),
       fcl.arg(token.displayName, t.String),
@@ -142,7 +143,7 @@ async function addTokens(tokens) {
 }
 
 async function updateTokens(tokens) {
-  for(const token of tokens) {
+  for (const token of tokens) {
     const args = [
       fcl.arg(token.name, t.String),
       fcl.arg(token.displayName, t.String),
@@ -158,7 +159,7 @@ async function updateTokens(tokens) {
 }
 
 async function removeTokens(tokens) {
-  for(const token of tokens) {
+  for (const token of tokens) {
     const key = `${token.name}.0x${token.address.slice(2).replace(/^0+/g, '')}`
     const args = [fcl.arg(key, t.String)]
     console.log("Removing Token:", token.displayName)
@@ -167,7 +168,7 @@ async function removeTokens(tokens) {
 }
 
 async function addPairs(pairs) {
-  for(const pair of pairs) {
+  for (const pair of pairs) {
     const args = [
       fcl.arg(pair.name, t.String),
       fcl.arg(pair.token0, t.String),
@@ -181,7 +182,7 @@ async function addPairs(pairs) {
 }
 
 async function updatePairs(pairs) {
-  for(const pair of pairs) {
+  for (const pair of pairs) {
     const args = [
       fcl.arg(pair.name, t.String),
       fcl.arg(pair.address, t.Address),
@@ -193,7 +194,7 @@ async function updatePairs(pairs) {
 }
 
 async function removePairs(pairs) {
-  for(const pair of pairs) {
+  for (const pair of pairs) {
     const key = `${pair.name}.0x${pair.address.slice(2).replace(/^0+/g, '')}`
     const args = [fcl.arg(key, t.String)]
     console.log("Removing Pair:", pair.name)
@@ -201,7 +202,7 @@ async function removePairs(pairs) {
   }
 }
 
-async function main () {
+async function main() {
   fcl.config({ "accessNode.api": ACCESS_NODE, "0xProfile": ADDRESS })
   const { newTokens, updatedTokens, removedTokens } = await diffTokens()
   const { newPairs, updatedPairs, removedPairs } = await diffPairs()
