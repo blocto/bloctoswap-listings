@@ -1,10 +1,21 @@
 pub contract ListedPairs {
+  /****** Events ******/
+  pub event PairAdded(key: String, name: String, token0: String, token1: String, address: Address)
+  pub event PairUpdated(key: String)
+  pub event PairRemoved(key: String)
+
+  /****** Contract Variables ******/
+  access(contract) var _pairs: { String: PairInfo }
+
+  pub let AdminStoragePath: StoragePath
+
+  /****** Composite Type Definitions ******/
   pub struct PairInfo {
-    pub var name: String;
-    pub var token0: String;
-    pub var token1: String;
-    pub var address: Address;
-    pub var liquidityToken: String?;
+    pub let name: String
+    pub let token0: String
+    pub let token1: String
+    pub let address: Address
+    pub var liquidityToken: String?
 
     init(name: String, token0: String, token1: String, address: Address, liquidityToken: String?) {
       self.name = name
@@ -19,34 +30,42 @@ pub contract ListedPairs {
     }
   }
 
-  access(contract) var _pairs: { String: PairInfo };
+  pub resource Admin {
+    pub fun addPair(name: String, token0: String, token1: String, address: Address, liquidityToken: String?) {
+      var key = name.concat(".").concat(address.toString())
 
-  pub fun pairExists(key: String): Bool {
-    return self._pairs.containsKey(key)
-  }
+      if (pairExists(key: key)) {
+        return
+      }
 
-  access(contract) fun addPair(name: String, token0: String, token1: String, address: Address, liquidityToken: String?) {
-    var key = name.concat(".").concat(address.toString())
-    if (self._pairs.containsKey(key)) {
-      return;
+      ListedPairs._pairs[key] = PairInfo(
+        name: name,
+        token0: token0,
+        token1: token1,
+        address: address, 
+        liquidityToken: liquidityToken,
+      )
+
+      emit PairAdded(key: key, name: name, token0: String, token1: String, address: Address)
     }
 
-    self._pairs[key] = PairInfo(
-      name: name,
-      token0: token0,
-      token1: token1,
-      address: address, 
-      liquidityToken: liquidityToken,
-    )
+    pub fun updatePair(name: String, address: Address, liquidityToken: String?) {
+      var key = name.concat(".").concat(address.toString())
+      ListedPairs._pairs[key]!.update(liquidityToken: liquidityToken)
+
+      emit PairUpdated(key: key)
+    }
+
+    pub fun removePair(key: String) {
+      ListedPairs._pairs.remove(key: key)
+
+      emit PairRemoved(key: key)
+    }
   }
 
-  access(contract) fun removePair(key: String) {
-    self._pairs.remove(key: key)
-  }
-
-  access(contract) fun updatePair(name: String, address: Address, liquidityToken: String?) {
-    var key = name.concat(".").concat(address.toString())
-    self._pairs[key]!.update(liquidityToken: liquidityToken)
+  /****** Methods ******/
+  pub fun pairExists(key: String): Bool {
+    return self._pairs.containsKey(key)
   }
 
   pub fun getPairs(): [PairInfo] {
@@ -55,5 +74,9 @@ pub contract ListedPairs {
 
   init () {
     self._pairs = {}
+    self.AdminStoragePath = /storage/bloctoSwapListedPairsAdmin
+
+    let admin <- create Admin()
+    self.account.save(<-admin, to: self.AdminStoragePath)
   }
 }
