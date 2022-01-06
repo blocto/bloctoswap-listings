@@ -73,6 +73,10 @@ pub contract ListedPairs {
   }
 
   init () {
+    self.AdminStoragePath = /storage/bloctoSwapListedPairsAdmin
+    let admin <- create Admin()
+    self.account.save(<-admin, to: self.AdminStoragePath)
+
     self._pairs = {}
     self.AdminStoragePath = /storage/bloctoSwapListedPairsAdmin
 

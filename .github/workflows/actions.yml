@@ -32,6 +32,8 @@ jobs:
       run: |
         echo "NETWORK=testnet" >> $GITHUB_ENV
         echo "ACCESS_NODE=https://access-testnet.onflow.org" >> $GITHUB_ENV
+        echo "ADDRESS=$TESTNET_ADDRESS" >> $GITHUB_ENV
+        echo "PRIVATE_KEY=$TESTNET_PRIVATE_KEY" >> $GITHUB_ENV
         echo $GITHUB_ENV
     - name: Set env to mainnet
       if: endsWith(github.ref, '/main')

@@ -7,9 +7,7 @@
 	},
 	"contracts": {
 		"ListedTokens": "./contracts/ListedTokens.cdc",
-		"ListedPairs": "./contracts/ListedPairs.cdc",
-		"TestListedTokens": "./tests/TestListedTokens.cdc",
-		"TestListedPairs": "./tests/TestListedPairs.cdc"
+		"ListedPairs": "./contracts/ListedPairs.cdc"
 	},
 	"networks": {
 		"emulator": "127.0.0.1:3569",
@@ -23,10 +21,10 @@
 		}
 	},
 	"deployments": {
-		"testnet": {
+    "testnet": {
       "bloctoswap-account": ["ListedTokens", "ListedPairs"]
     },
-		"mainnet": {
+    "mainnet": {
       "bloctoswap-account": ["ListedTokens", "ListedPairs"]
 		}
 	}
