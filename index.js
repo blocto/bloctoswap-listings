@@ -20,7 +20,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY
 const TOKENS_LIST = require(`./data/${NETWORK}/tokens.json`)
 const PAIRS_LIST = require(`./data/${NETWORK}/pairs.json`)
 
-const ec = new EC(NETWORK === 'testnet' ? 'p256' : 'secp256k1')
+const ec = new EC('secp256k1')
 
 const signWithKey = (privateKey, msgHex) => {
   const key = ec.keyFromPrivate(Buffer.from(privateKey, 'hex'))
