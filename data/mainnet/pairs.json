@@ -19,5 +19,12 @@
     "token1": "TeleportedTetherToken",
     "address": "0x87f3f233f34b0733",
     "liquidityToken": null
+  },
+  {
+    "name": "RevvFlowSwapPair",
+    "token0": "REVV",
+    "token1": "FlowToken",
+    "address": "0x5e284fb7cff23a3f",
+    "liquidityToken": null
   }
 ]
