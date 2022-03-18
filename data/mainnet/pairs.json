@@ -19,5 +19,12 @@
     "token1": "TeleportedTetherToken",
     "address": "0x87f3f233f34b0733",
     "liquidityToken": null
+  },
+  {
+    "name": "UsdcUsdtSwapPair",
+    "token0": "FiatToken",
+    "token1": "TeleportedTetherToken",
+    "address": "0x9c6f94adf47904b5",
+    "liquidityToken": null
   }
 ]
