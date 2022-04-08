@@ -33,5 +33,12 @@
     "token1": "TeleportedTetherToken",
     "address": "0x9c6f94adf47904b5",
     "liquidityToken": null
+  },
+  {
+    "name": "StarlyUsdtSwapPair",
+    "token0": "StarlyToken",
+    "token1": "TeleportedTetherToken",
+    "address": "0x6efab66df92c37e4",
+    "liquidityToken": null
   }
 ]
