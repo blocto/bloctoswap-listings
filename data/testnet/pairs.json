@@ -35,9 +35,9 @@
     "liquidityToken": null
   },
   {
-    "name": "StarlyFlowSwapPair",
+    "name": "StarlyUsdtSwapPair",
     "token0": "StarlyToken",
-    "token1": "FlowToken",
+    "token1": "TeleportedTetherToken",
     "address": "0x22d84efc93a8b21a",
     "liquidityToken": null
   }
