@@ -28,13 +28,6 @@
     "liquidityToken": null
   },
   {
-    "name": "UsdcUsdtSwapPair",
-    "token0": "FiatToken",
-    "token1": "TeleportedTetherToken",
-    "address": "0xd017f81bffc9aa05",
-    "liquidityToken": null
-  },
-  {
     "name": "StarlyUsdtSwapPair",
     "token0": "StarlyToken",
     "token1": "TeleportedTetherToken",
