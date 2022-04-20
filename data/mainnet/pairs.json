@@ -40,5 +40,12 @@
     "token1": "TeleportedTetherToken",
     "address": "0x6efab66df92c37e4",
     "liquidityToken": null
+  },
+  {
+    "name": "SprtUsdtSwapPair",
+    "token0": "TeleportedSportiumToken",
+    "token1": "TeleportedTetherToken",
+    "address": "0x60e1db11f37ac469",
+    "liquidityToken": null
   }
 ]
