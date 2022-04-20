@@ -31,7 +31,7 @@
     "name": "UsdcUsdtSwapPair",
     "token0": "FiatToken",
     "token1": "TeleportedTetherToken",
-    "address": "0xd017f81bffc9aa05",
+    "address": "0x481744401ea249c0",
     "liquidityToken": null
   },
   {
@@ -39,6 +39,13 @@
     "token0": "StarlyToken",
     "token1": "TeleportedTetherToken",
     "address": "0x22d84efc93a8b21a",
+    "liquidityToken": null
+  },
+  {
+    "name": "SprtUsdtSwapPair",
+    "token0": "TeleportedSportiumToken",
+    "token1": "TeleportedTetherToken",
+    "address": "0x0f5be7fc963db41b",
     "liquidityToken": null
   }
 ]
