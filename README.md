@@ -3,7 +3,7 @@ By sending PR to this repo, you can list your tokens & swap pair on Bloctoswap.
 
 ### Add your token to Bloctoswap
 To add you token to Bloctoswap, please add a new entry in `data/{network}/tokens.json`. 
-An token entry should be in following format:
+A token entry should be in following format:
 ```
 {
   // name of the token that is used in the contract
@@ -26,8 +26,8 @@ An token entry should be in following format:
 ```
 
 ### Add new swap pair to Bloctoswap
-To add you new swap pair to Bloctoswap, please add a new entry in `data/{network}/pairs.json`. 
-An token entry should be in following format:
+To add your new swap pair to Bloctoswap, please add a new entry in `data/{network}/pairs.json`. 
+A swap pair entry should be in following format:
 ```
 {
   // name of the swap pair used in the contract
