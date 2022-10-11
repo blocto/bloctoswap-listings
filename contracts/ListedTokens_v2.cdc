@@ -34,7 +34,7 @@ pub contract ListedTokens_v2 {
   }
 
   pub resource TokenProposer {
-    pub fun addToken(name: String, displayName: String, symbol: String, address: Address, vaultPath: String, receiverPath: String, balancePath: String, creatorResource: &TokenProposer) {
+    pub fun addToken(name: String, displayName: String, symbol: String, address: Address, vaultPath: String, receiverPath: String, balancePath: String) {
       ListedTokens_v2.addToken(
         name: name, 
         displayName: displayName, 
@@ -43,14 +43,14 @@ pub contract ListedTokens_v2 {
         vaultPath: vaultPath, 
         receiverPath: receiverPath, 
         balancePath: balancePath, 
-        creatorAddress: creatorResource.owner!.address
+        creatorAddress: self.owner!.address
       )
     }
 
-    pub fun updateToken(name: String, displayName: String, symbol: String, address: Address, vaultPath: String, receiverPath: String, balancePath: String, proposerResource: &TokenProposer) {
+    pub fun updateToken(name: String, displayName: String, symbol: String, address: Address, vaultPath: String, receiverPath: String, balancePath: String) {
       let token = ListedTokens_v2.getToken(name: name, address: address)
 
-      if (proposerResource.owner!.address != token.creatorAddress) {
+      if (self.owner!.address != token.creatorAddress) {
         panic("Access denied. Only the proposer for listing this token and the admin are allowed to update it.")
       }
 
@@ -65,10 +65,10 @@ pub contract ListedTokens_v2 {
       )
     }
 
-    pub fun removeToken(name: String, address: Address, proposerResource: &TokenProposer) {
+    pub fun removeToken(name: String, address: Address) {
       let token = ListedTokens_v2.getToken(name: name, address: address)
      
-      if (proposerResource.owner!.address != token.creatorAddress) {
+      if (self.owner!.address != token.creatorAddress) {
         panic("Access denied. Only the proposer for listing this token and the admin are allowed to remove it.")
       }
 
@@ -77,7 +77,7 @@ pub contract ListedTokens_v2 {
   }
 
   pub resource Admin {
-    pub fun addToken(name: String, displayName: String, symbol: String, address: Address, vaultPath: String, receiverPath: String, balancePath: String, creatorResource: &Admin) {
+    pub fun addToken(name: String, displayName: String, symbol: String, address: Address, vaultPath: String, receiverPath: String, balancePath: String) {
       ListedTokens_v2.addToken(
         name: name, 
         displayName: displayName, 
@@ -86,7 +86,7 @@ pub contract ListedTokens_v2 {
         vaultPath: vaultPath, 
         receiverPath: receiverPath, 
         balancePath: balancePath, 
-        creatorAddress: creatorResource.owner!.address
+        creatorAddress: self.owner!.address
       )
     }
 
