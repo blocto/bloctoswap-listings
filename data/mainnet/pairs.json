@@ -47,5 +47,12 @@
     "token1": "TeleportedTetherToken",
     "address": "0x60e1db11f37ac469",
     "liquidityToken": null
-  }
+  },
+    {
+    "name": "SwapPair",
+    "token0": "brasil",
+    "token1": "FlowToken",
+    "address": "0xc62683804969427d",
+    "liquidityToken": null
+  },
 ]
